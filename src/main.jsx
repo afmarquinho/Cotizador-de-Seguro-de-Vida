@@ -1,11 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import CotizadorApp from "./CotizadorApp";
+import { CotizadorProvider } from "./cotizador/context/CotizadorProvider";
 
 
-import CotizadorApp from './CotizadorApp'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CotizadorApp/>
-  </React.StrictMode>,
-)
+    <CotizadorProvider>
+      <CotizadorApp />
+    </CotizadorProvider>
+  </React.StrictMode>
+);

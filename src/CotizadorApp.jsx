@@ -1,12 +1,12 @@
-import HomePage from "./cotizador/pages/HomePage"
 
+import HomePage from "./cotizador/pages/HomePage";
 
 const CotizadorApp = () => {
   return (
-    <div>
-    <HomePage/>
-    </div>
-  )
-}
+  
+      <HomePage />
+    
+  );
+};
 
-export default CotizadorApp
+export default CotizadorApp;
