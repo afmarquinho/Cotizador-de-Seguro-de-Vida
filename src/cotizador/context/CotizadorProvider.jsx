@@ -22,8 +22,11 @@ const CotizadorContext = createContext();
 
 const CotizadorProvider = ({ children }) => {
   
-  const { formValues, error, onInputChange, onSubmit, resetForm, cargando } =
+  const { formValues, error, onInputChange, onSubmit, resetForm } =
     useForm(initialValue);
+    const [cargando, setCargando] = useState(false);
+    const [resultado, setResultado] = useState(0);
+
 
   const prima = () => {
     //factoredad
@@ -37,8 +40,14 @@ const CotizadorProvider = ({ children }) => {
 
     // base ajustada
     const baseAjustada = base * porcentaje(formValues.preexistencia) + base;
-
-    return factorEdad * factorTiempo * baseAjustada;
+    setCargando(true)
+    setTimeout(() => {
+      setCargando(false)
+      setResultado((factorEdad * factorTiempo * baseAjustada).toFixed(2));
+    }, 3000);
+    
+    return 
+    setTimeout
   };
 
   // prima = fedad * ftiempo * base ajustada
@@ -50,8 +59,9 @@ const CotizadorProvider = ({ children }) => {
         onInputChange,
         onSubmit,
         resetForm,
-        prima,
         cargando,
+        prima,
+        resultado,
       }}
     >
       {children}

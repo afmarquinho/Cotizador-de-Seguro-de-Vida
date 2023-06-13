@@ -3,8 +3,7 @@ import { useState } from "react";
 const useForm = (initialValue = {}) => {
   const [formValues, setFormValues] = useState(initialValue);
   const [error, setError] = useState("");
-  const [cargando, setCargando] = useState(false);
-
+ 
   const onInputChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -22,10 +21,7 @@ const useForm = (initialValue = {}) => {
         return;
       }
     }
-    setCargando(true)
-    setTimeout(() => {
-      setTimeout(false)
-    }, 3000);
+    
 
     setError("");
   };
@@ -34,7 +30,7 @@ const useForm = (initialValue = {}) => {
     setFormValues({});
   };
 
-  return { formValues, error, onInputChange, onSubmit, resetForm, cargando };
+  return { formValues, error, onInputChange, onSubmit, resetForm };
 };
 
 export default useForm;

@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
 import { useContext } from "react";
 import CotizadorContext from "../context/CotizadorProvider";
+import Spinner from "./Spinner";
+import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
   padding: 0 0 0 3rem;
@@ -26,47 +27,52 @@ const Div = styled.div`
   align-items: baseline;
 `;
 const Resultado = () => {
-  const { formValues, prima, cargando } = useContext(CotizadorContext);
-  const valor = prima();
-  const primaFormateada = valor.toFixed(2);
+  const { formValues, cargando, resultado } = useContext(CotizadorContext);
 
   return (
     <>
       <H2>COTIZACIÓN</H2>
-      <Contenedor>
-        <Div>
-          <H4>Nombre del Cliente:</H4>
-          <P>{formValues.nombreUsuario}</P>
-        </Div>
-        <Div>
-          <H4>Apellido:</H4>
-          <P>{formValues.apellidoUsuario}</P>
-        </Div>
-        <Div>
-          <H4>Tipo de Preexistencia:</H4>
-          <P> {formValues.preexistencia}</P>
-        </Div>
-        <Div>
-          <H4>Nombre de la Preexistencia:</H4>
-          <P> {formValues.cual}</P>
-        </Div>
-        <Div>
-          <H4>Salario anual:</H4>
-          <P> USD {formValues.salario}</P>
-        </Div>
-        <Div>
-          <H4>Tipo de Póliza:</H4>
-          <P> a termino a {formValues.tiempo} años</P>
-        </Div>
-        <Div>
-          <H4>Monto de Cobertura:</H4>
-          <P>USD {formValues.montoCobertura}</P>
-        </Div>
-        <Div>
-          <H4>Prima Anual: </H4>
-          <P1> USD {primaFormateada}</P1>
-        </Div>
-      </Contenedor>
+
+      {
+        (resultado === 0 || NaN ? null : cargando ? (
+          <Spinner />
+        ) : (
+          <Contenedor>
+            <Div>
+              <H4>Nombre del Cliente:</H4>
+              <P>{formValues.nombreUsuario}</P>
+            </Div>
+            <Div>
+              <H4>Apellido:</H4>
+              <P>{formValues.apellidoUsuario}</P>
+            </Div>
+            <Div>
+              <H4>Tipo de Preexistencia:</H4>
+              <P> {formValues.preexistencia}</P>
+            </Div>
+            <Div>
+              <H4>Nombre de la Preexistencia:</H4>
+              <P> {formValues.cual}</P>
+            </Div>
+            <Div>
+              <H4>Salario anual:</H4>
+              <P> USD {formValues.salario}</P>
+            </Div>
+            <Div>
+              <H4>Tipo de Póliza:</H4>
+              <P> a termino a {formValues.tiempo} años</P>
+            </Div>
+            <Div>
+              <H4>Monto de Cobertura:</H4>
+              <P>USD {formValues.montoCobertura}</P>
+            </Div>
+            <Div>
+              <H4>Prima Anual: </H4>
+              <P1> {resultado}</P1>
+            </Div>
+          </Contenedor>
+        ))
+      }
     </>
   );
 };

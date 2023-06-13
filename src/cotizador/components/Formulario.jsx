@@ -1,13 +1,14 @@
 import { useContext } from "react";
-import useForm from "../hooks/useForm";
 import { Form, Div } from "../styles/formulario.styles";
 import Error from "./Error";
 import CotizadorContext from "../context/CotizadorProvider";
 
 const Formulario = () => {
-  const { formValues, error, onInputChange, onSubmit, resetForm } =
+  const { formValues, error, onInputChange, onSubmit, resetForm, prima } =
     useContext(CotizadorContext);
-  
+  const onCotizar = () => {
+    prima();
+  };
   return (
     <>
       <Form onSubmit={onSubmit}>
@@ -52,7 +53,7 @@ const Formulario = () => {
           </div>
           <div className="input-group">
             <label className="salario-label" htmlFor="salario">
-              Salario en USD
+              Salario anual en USD
             </label>
             <input
               type="number"
@@ -139,6 +140,7 @@ const Formulario = () => {
               type="submit"
               className="btn-cotizar"
               value="Cotizar"
+              onClick={onCotizar}
             />
           </div>
         </div>
